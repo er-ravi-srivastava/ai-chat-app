@@ -1,0 +1,38 @@
+keyword_normalization:
+  sob: breathlessness
+  breathless: breathlessness
+  temp: fever
+  emesis: vomiting
+
+stopwords: ["the","a","an","and","of","for","with","to","is","are","i","have","my"]
+
+red_flags:
+  - keywords: ["chest", "pressure", "tightness", "jaw", "arm", "sweaty"]
+    message: "Possible cardiac symptoms. Seek urgent care."
+  - keywords: ["shortness", "breathlessness", "confused"]
+    message: "Severe breathing difficulty can be life-threatening."
+  - keywords: ["bleeding", "vomit", "blood"]
+    message: "Concerning bleeding symptoms."
+
+conditions:
+  - name: "Common Cold"
+    keywords: ["runny", "nose", "sneezing", "sore", "throat", "cough"]
+    negative_keywords: ["fever"]
+    weights: {keyword: 1.0, negative: 1.0, age: 0.3}
+    age_band: [5, 70]
+
+  - name: "Influenza (Flu)"
+    keywords: ["fever", "chills", "aches", "fatigue", "cough", "headache"]
+    weights: {keyword: 1.0, age: 0.3}
+    age_band: [5, 85]
+
+  - name: "Asthma Exacerbation"
+    keywords: ["wheeze", "wheezing", "breathlessness", "cough", "chest", "tightness"]
+    weights: {keyword: 1.0, age: 0.3}
+    age_band: [5, 70]
+
+  - name: "Migraine"
+    keywords: ["headache", "nausea", "vomiting", "aura", "throbbing"]
+    negative_keywords: ["fever"]
+    weights: {keyword: 1.0, negative: 1.0, age: 0.5}
+    age_band: [10, 60]
